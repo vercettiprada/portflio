@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     <link rel="stylesheet" href="k.css">
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <style>
     body {
@@ -94,48 +97,100 @@
     }
 </style>
 <body>
-    <header>
-        <h1>NICO A SALIGUMBA</h1>
-        <p>Web Developer | Designer | Creative</p>
-        <p>
-            Building things that look good, feel good, and work effortlessly.
-            A mix of abstract ideas, technical precision, and a bit of edge. 
-            Whether it's code, visuals, or something in between it's all about execution.
-            Driven by aesthetics, function, and the occasional existential thought.
-        </p>
-    </header>
-    
-    <nav>
-        <ul>
-            <li><a href="a.html">About</a></li>
-            <li><a href="p.html">Projects</a></li>
-            <li><a href="c.html">Contact</a></li>
-        </ul>
-    </nav>
-    
-    <footer>
-        <p>&copy; 2025 NICO. All rights reserved.</p>
-    </footer>
+    <div id="root"></div>
+    <script type="text/babel">
+        function App() {
+            const [fade, setFade] = React.useState(false);
 
-    <script>
-        
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault(); 
-                const href = this.getAttribute('href'); 
-                document.body.classList.add('fade-out'); 
+            const handleNavClick = (e, href) => {
+                e.preventDefault();
+                setFade(true);
                 setTimeout(() => {
-                    window.location.href = href; 
-                }, 500); 
-            });
-        });
+                    window.location.href = href;
+                }, 500);
+            };
 
-        window.addEventListener('load', () => {
-            const bottomImage = document.getElementById('bottomImage');
-            setTimeout(() => {
-                bottomImage.classList.add('visible');
-            }, 1000); 
-        });
+            return (
+                <div className={fade ? "fade-out" : ""}>
+                    <header>
+                        <img
+        src="v.png"
+        alt="Nico A Saligumba"
+        style={{
+            width: "140px",
+            height: "140px",
+            objectFit: "cover",
+            borderRadius: "50%",
+            border: "2.5px solid #b43e3e",
+            boxShadow: "0 2px 24px 0 rgba(0,0,0,0.07)",
+            filter: "grayscale(70%)",
+            transition: "filter 0.5s, box-shadow 0.5s, border-color 0.5s",
+            marginBottom: "18px",
+            background: "#fff"
+        }}
+        onMouseOver={e => {
+            e.currentTarget.style.filter = "grayscale(0%)";
+            e.currentTarget.style.boxShadow = "0 4px 32px 0 rgba(180,62,62,0.18)";
+            e.currentTarget.style.borderColor = "#222";
+        }}
+        onMouseOut={e => {
+            e.currentTarget.style.filter = "grayscale(70%)";
+            e.currentTarget.style.boxShadow = "0 2px 24px 0 rgba(0,0,0,0.07)";
+            e.currentTarget.style.borderColor = "#b43e3e";
+        }}
+                        />
+                        <h1 style={{
+        fontSize: "2.7rem",
+        fontWeight: "bold",
+        letterSpacing: "2px",
+        margin: "0 0 10px 0"
+    }}>NICO A SALIGUMBA</h1>
+    <p style={{
+        color: "#b43e3e",
+        fontWeight: "600",
+        fontSize: "1.1rem",
+        marginBottom: "18px"
+    }}>Web Developer &nbsp;|&nbsp; Designer &nbsp;|&nbsp; Creative</p>
+    <div style={{
+        maxWidth: "540px",
+        margin: "0 auto",
+        color: "#333",
+        fontSize: "1.08rem",
+        lineHeight: "1.7",
+        background: "rgba(255,255,255,0.85)",
+        borderRadius: "12px",
+        padding: "22px 28px",
+        boxShadow: "0 2px 12px rgba(0,0,0,0.04)"
+    }}>
+        <p>
+            Hey! I’m Nico, a passionate web developer and designer who loves turning ideas into beautiful, functional experiences. 
+            My work blends clean code, bold visuals, and a touch of personality—because the web should feel alive, not just exist.
+        </p>
+        <p>
+            Whether I’m building a portfolio, a landing page, or a full-blown design system, I obsess over the details: 
+            smooth animations, crisp layouts, and interfaces that just feel right. I believe in <span style={{color:"#b43e3e", fontWeight:"bold"}}>creativity with purpose</span>—making things that not only look good, but work even better.
+        </p>
+        <p>
+            When I’m not coding or designing, you’ll find me exploring photography, sketching, or diving into new tech. 
+            Let’s create something awesome together!
+        </p>
+    </div>
+                    </header>
+                    <nav>
+                        <ul>
+                            <li><a href="a.html" onClick={e => handleNavClick(e, "a.html")}>About</a></li>
+                            <li><a href="p.html" onClick={e => handleNavClick(e, "p.html")}>Projects</a></li>
+                            <li><a href="c.html" onClick={e => handleNavClick(e, "c.html")}>Contact</a></li>
+                        </ul>
+                    </nav>
+                    <footer>
+                        <p>&copy; 2025 NICO. All rights reserved.</p>
+                    </footer>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
     </script>
 </body>
 </html>
