@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     <link rel="stylesheet" href="k.css">
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <style>
     body {
@@ -109,61 +112,65 @@
     }
 </style>
 <body>
-    <header>
-        <h1>NICO A SALIGUMBA</h1>
-        <p>Web Developer | Designer | Creative</p>
-    </header>
-    
-    <nav>
-        <ul>
-            <li><a href="a.html">About</a></li>
-            <li><a href="p.html">Projects</a></li>
-            <li><a href="c.html">Contact</a></li>
-        </ul>
-    </nav>
-   
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="projects-container">
-            <div class="project-card">
-                <h3>Portfolio Redesign</h3>
-                <p>A sleek and modern portfolio website built with HTML, CSS, and JavaScript. Features smooth animations and responsive design.</p>
-            </div>
-            <div class="project-card">
-                <h3>Creative Landing Page</h3>
-                <p>A visually stunning landing page for a fictional brand, showcasing advanced CSS animations and parallax scrolling effects.</p>
-            </div>
-            <div class="project-card">
-                <h3>Interactive Resume</h3>
-                <p>An interactive resume built with React, featuring dynamic content and a clean, professional design.</p>
-            </div>
-            <div class="project-card">
-                <h3>Design System</h3>
-                <p>A reusable design system for web applications, including typography, color palettes, and UI components.</p>
-            </div>
-            <div class="project-card">
-                <h3>Photography Showcase</h3>
-                <p>A gallery-style website to display photography, with smooth transitions and a lightbox feature for viewing images.</p>
-            </div>
-        </div>
-    </section>
-    
-    <footer>
-        <p>&copy; 2025 Your Name. All rights reserved.</p>
-    </footer>
+    <div id="root"></div>
+    <script type="text/babel">
+        function App() {
+            const [fade, setFade] = React.useState(false);
 
-    <script>
-       
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault(); 
-                const href = this.getAttribute('href'); 
-                document.body.classList.add('fade-out'); 
+            const handleNavClick = (e, href) => {
+                e.preventDefault();
+                setFade(true);
                 setTimeout(() => {
-                    window.location.href = href; 
-                }, 500); 
-            });
-        });
+                    window.location.href = href;
+                }, 500);
+            };
+
+            return (
+                <div className={fade ? "fade-out" : ""}>
+                    <header>
+                        <h1>NICO A SALIGUMBA</h1>
+                        <p>Web Developer | Designer | Creative</p>
+                    </header>
+                    <nav>
+                        <ul>
+                            <li><a href="a.html" onClick={e => handleNavClick(e, "a.html")}>About</a></li>
+                            <li><a href="p.html" onClick={e => handleNavClick(e, "p.html")}>Projects</a></li>
+                            <li><a href="c.html" onClick={e => handleNavClick(e, "c.html")}>Contact</a></li>
+                        </ul>
+                    </nav>
+                    <section id="projects">
+                        <h2>Projects</h2>
+                        <div className="projects-container">
+                            <div className="project-card">
+                                <h3>Portfolio Redesign</h3>
+                                <p>A sleek and modern portfolio website built with HTML, CSS, and JavaScript. Features smooth animations and responsive design.</p>
+                            </div>
+                            <div className="project-card">
+                                <h3>Creative Landing Page</h3>
+                                <p>A visually stunning landing page for a fictional brand, showcasing advanced CSS animations and parallax scrolling effects.</p>
+                            </div>
+                            <div className="project-card">
+                                <h3>Interactive Resume</h3>
+                                <p>An interactive resume built with React, featuring dynamic content and a clean, professional design.</p>
+                            </div>
+                            <div className="project-card">
+                                <h3>Design System</h3>
+                                <p>A reusable design system for web applications, including typography, color palettes, and UI components.</p>
+                            </div>
+                            <div className="project-card">
+                                <h3>Photography Showcase</h3>
+                                <p>A gallery-style website to display photography, with smooth transitions and a lightbox feature for viewing images.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <footer>
+                        <p>&copy; 2025 Your Name. All rights reserved.</p>
+                    </footer>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
     </script>
 </body>
 </html>
